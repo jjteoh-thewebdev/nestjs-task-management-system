@@ -16,11 +16,16 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
 
+    const internalMessage = exception.getResponse()[`message`]
+    const message = Array.isArray(internalMessage)
+      ? internalMessage[0]
+      : internalMessage || exception.message
+
     response
       .status(exception.getStatus() ?? HttpStatus.INTERNAL_SERVER_ERROR)
       .json({
         data: null,
-        error: exception.message,
+        error: message,
       })
   }
 }

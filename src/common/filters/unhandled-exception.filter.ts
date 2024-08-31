@@ -14,6 +14,9 @@ export class UnhandledExceptionsFilter extends BaseExceptionFilter {
     const httpCtx = host.switchToHttp()
     const { httpAdapter } = this._httpAdapterHost
 
+    // log to console, can be replace to custom logger
+    console.error(exception)
+
     let httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR
     let message = 'Unhandled Exception.'
 

@@ -30,12 +30,17 @@ export class HttpResponseInterceptor<T>
   ): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(
       map((data: any) => {
-        const { pagination } = data
+        if (data && Object.keys(data).includes(`pagination`)) {
+          return {
+            error: null,
+            data: data.data,
+            pagination: data.pagination,
+          }
+        }
 
         return {
           error: null,
           data,
-          pagination,
         }
       }),
     )
