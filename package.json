@@ -20,19 +20,26 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@nestjs/cache-manager": "^2.2.2",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^3.2.3",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/throttler": "^6.2.1",
     "@prisma/client": "^5.19.0",
+    "cache-manager": "^5.7.6",
+    "cache-manager-ioredis": "^2.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "ioredis": "^5.4.1",
+    "jest-mock-extended": "2.0.4",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "ts-mockito": "^2.6.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
@@ -72,10 +79,14 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.service.(t|j)s",
+      "**/*.controller.(t|j)s"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/prisma/prisma.mock.ts"
+    ]
   },
   "config": {
     "commitizen": {
