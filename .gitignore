@@ -41,4 +41,4 @@ lerna-debug.log*
 
 # local files
 .redis
-.todo.md
+todo.md
