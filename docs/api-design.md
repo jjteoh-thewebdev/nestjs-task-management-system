@@ -31,7 +31,7 @@ General response body structure(in json)
 
 ## Query
 
-for query endpoints, we partially adapt [`strapi`](https://docs.strapi.io/dev-docs/api/rest/filters-locale-publication#filtering) style for filtering, sorting and pagination.
+for query endpoints, we partially adapt [`strapi`](https://docs.strapi.io/dev-docs/api/rest/filters-locale-publication#filtering) style for filtering, sorting and pagination. All text-base parameters support `case-incensitive` inclusive(contains) search.
 
 ### Filtering
 
@@ -45,6 +45,12 @@ example 2: multiple filters
 
 ```bash
 /v1/tasks?filters[title]=hello&filters[status]=OPEN
+```
+
+example 3: date range filter
+
+```bash
+/v1/tasks?filters[createAtStart]=2024-08-01&filters[createdAtEnd]=2024-09-01
 ```
 
 ### Sorting

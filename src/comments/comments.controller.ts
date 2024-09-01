@@ -66,7 +66,6 @@ export class CommentsController {
   // PUT /v1/comments/:id
   @Put(`:id`)
   async replaceOne(@Param(`id`) id: number, @Body() dto: ReplaceCommentDto) {
-    console.log(`here`)
     return await this._commentService.updateOne(id, dto)
   }
 

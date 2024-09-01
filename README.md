@@ -5,9 +5,17 @@ Additionally, users should be able to comment on tasks. Implement features requi
 knowledge of Redis for caching and rate limiting, Prisma for database interactions, and
 Node.js for core functionalities. Build with Prisma + Nest.js
 
+## Quick Links
+
+System Overview [here](./docs/system-architecture.drawio.png)
+
 Database design over [here](./docs/database.md)
 
 API design over [here](./docs/api-design.md)
+
+Postman collection [here](./docs/task-management.postman_collection.json)
+
+Swagger(a.k.a OpenAPI spec - auto generated) [here](./docs/openapi-spec.yaml)
 
 ## Installation
 
