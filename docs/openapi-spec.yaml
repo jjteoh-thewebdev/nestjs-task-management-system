@@ -1,0 +1,1101 @@
+openapi: 3.0.0
+info:
+  title: task-management
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: v1
+  - name: v1 > comments
+  - name: v1 > tasks
+paths:
+  /v1/comments/{id}:
+    get:
+      tags:
+        - v1 > comments
+      summary: get by id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249868200216'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '308'
+            ETag:
+              schema:
+                type: string
+                example: W/"134-XvzpuC659HMcXgn+GOOypR1pFkA"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 02:55:36 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 1
+                  userId: 1
+                  taskId: 5
+                  content: this is my comment
+                  createdAt: '2024-08-31T12:27:33.742Z'
+                  updatedAt: '2024-08-31T12:29:19.662Z'
+                  deletedAt: null
+                  user:
+                    id: 1
+                    username: user1
+                    createdAt: '2024-08-31T08:11:24.301Z'
+                    updatedAt: '2024-08-31T08:11:24.301Z'
+                    deletedAt: null
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249868199938'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '33'
+            ETag:
+              schema:
+                type: string
+                example: W/"21-hExXrc+B/JrRtNZvDXrmSmOg6/k"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 03:00:13 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data: null
+                error: Not Found
+    put:
+      tags:
+        - v1 > comments
+      summary: update a comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                userId: 2
+                taskId: 6
+                content: Hello World
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '11111'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249870296085'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '301'
+            ETag:
+              schema:
+                type: string
+                example: W/"12d-C2lRuw9EM8pwhainOkZgvEumvZQ"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 02:59:26 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 1
+                  userId: 2
+                  taskId: 6
+                  content: Hello World
+                  createdAt: '2024-08-31T12:27:33.742Z'
+                  updatedAt: '2024-09-01T02:59:26.325Z'
+                  deletedAt: null
+                  user:
+                    id: 2
+                    username: user2
+                    createdAt: '2024-08-31T08:11:24.301Z'
+                    updatedAt: '2024-08-31T08:11:24.301Z'
+                    deletedAt: null
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249870295981'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '38'
+            ETag:
+              schema:
+                type: string
+                example: W/"26-zAb7KIIX9xyOeTaPku6Iz/KxjUw"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 03:01:10 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data: null
+                error: invalid taskId
+        '404':
+          description: Not Found
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249870295962'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '33'
+            ETag:
+              schema:
+                type: string
+                example: W/"21-hExXrc+B/JrRtNZvDXrmSmOg6/k"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 03:01:29 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data: null
+                error: Not Found
+    delete:
+      tags:
+        - v1 > comments
+      summary: delete comment
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '204':
+          description: No Content
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249870806015'
+            ETag:
+              schema:
+                type: string
+                example: W/"e-hDOZGZ11/MTPwZq/A8sGFlQzkPc"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 02:59:56 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/comments:
+    post:
+      tags:
+        - v1 > comments
+      summary: create a comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                userId: 1111
+                taskId: 6
+                content: this is my comment
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249869445731'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '308'
+            ETag:
+              schema:
+                type: string
+                example: W/"134-ol4ztlnhywJKDFB1UOqJMtNn1wk"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 02:57:40 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 2
+                  userId: 1
+                  taskId: 6
+                  content: this is my comment
+                  createdAt: '2024-09-01T02:57:40.527Z'
+                  updatedAt: '2024-09-01T02:57:40.527Z'
+                  deletedAt: null
+                  user:
+                    id: 1
+                    username: user1
+                    createdAt: '2024-08-31T08:11:24.301Z'
+                    updatedAt: '2024-08-31T08:11:24.301Z'
+                    deletedAt: null
+        '400':
+          description: Bad Request
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249869445549'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '38'
+            ETag:
+              schema:
+                type: string
+                example: W/"26-Lk0aj2H5f+q8gqkA5E/4mgrpJC0"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 03:00:42 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                data: null
+                error: invalid userId
+    get:
+      tags:
+        - v1 > comments
+      summary: query
+      parameters:
+        - name: pagination[page]
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: pagination[pageSize]
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: filters[userId]
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: sort[0]
+          in: query
+          schema:
+            type: string
+          example: createdAt:asc
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249868680131'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '371'
+            ETag:
+              schema:
+                type: string
+                example: W/"173-VdR5F4moJHGPe45kG2z8SF2AYrA"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 02:56:30 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  - id: 1
+                    userId: 1
+                    taskId: 5
+                    content: this is my comment
+                    createdAt: '2024-08-31T12:27:33.742Z'
+                    updatedAt: '2024-08-31T12:29:19.662Z'
+                    deletedAt: null
+                    user:
+                      id: 1
+                      username: user1
+                      createdAt: '2024-08-31T08:11:24.301Z'
+                      updatedAt: '2024-08-31T08:11:24.301Z'
+                      deletedAt: null
+                pagination:
+                  total: 1
+                  pageCount: 1
+                  page: 1
+                  pageSize: 1
+  /v1/tasks/{id}:
+    get:
+      tags:
+        - v1 > tasks
+      summary: get by id
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '6'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249904825473'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '484'
+            ETag:
+              schema:
+                type: string
+                example: W/"1e4-78qp08FlF54f6bDjylRjHiMjRMY"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 03:56:38 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 6
+                  title: task1
+                  description: this is task 1
+                  dueDate: '2024-09-01T04:00:00.000Z'
+                  priority: null
+                  storyPoint: null
+                  status: OPEN
+                  createdById: 1
+                  createdAt: '2024-08-31T10:49:55.728Z'
+                  updatedAt: '2024-08-31T10:49:55.728Z'
+                  deletedAt: null
+                  labels:
+                    - label:
+                        id: 27
+                        name: dev
+                    - label:
+                        id: 28
+                        name: backend
+                  assignees:
+                    - user:
+                        id: 1
+                        username: user1
+                    - user:
+                        id: 2
+                        username: user2
+                  createdBy:
+                    id: 1
+                    username: user1
+    put:
+      tags:
+        - v1 > tasks
+      summary: update a task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: task5
+                description: this is task 1
+                dueDate: '2024-09-01 12:00:00.000'
+                createdBy: 1
+                labels:
+                  - dev
+                  - new
+                assignees:
+                  - 1
+                  - 3
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '5'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249912835182'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '480'
+            ETag:
+              schema:
+                type: string
+                example: W/"1e0-WKSUZ0s33JnkcJiU/0dVbdv96CA"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 04:09:59 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 5
+                  title: task5
+                  description: this is task 1
+                  dueDate: '2024-09-01T04:00:00.000Z'
+                  priority: null
+                  storyPoint: null
+                  status: OPEN
+                  createdById: 1
+                  createdAt: '2024-08-31T10:49:21.701Z'
+                  updatedAt: '2024-09-01T04:09:59.941Z'
+                  deletedAt: null
+                  labels:
+                    - label:
+                        id: 27
+                        name: dev
+                    - label:
+                        id: 35
+                        name: new
+                  assignees:
+                    - user:
+                        id: 1
+                        username: user1
+                    - user:
+                        id: 3
+                        username: user3
+                  createdBy:
+                    id: 1
+                    username: user1
+    delete:
+      tags:
+        - v1 > tasks
+      summary: delete a task
+      parameters:
+        - name: id
+          in: path
+          schema:
+            type: integer
+          required: true
+          example: '1'
+      responses:
+        '204':
+          description: No Content
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249913028118'
+            ETag:
+              schema:
+                type: string
+                example: W/"e-hDOZGZ11/MTPwZq/A8sGFlQzkPc"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 04:10:23 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: null
+  /v1/tasks:
+    get:
+      tags:
+        - v1 > tasks
+      summary: query
+      parameters:
+        - name: filters[status]
+          in: query
+          schema:
+            type: string
+          example: OPEN
+        - name: sort[0]
+          in: query
+          schema:
+            type: string
+          example: createdAt:asc
+        - name: pagination[page]
+          in: query
+          schema:
+            type: integer
+          example: '1'
+        - name: pagination[pageSize]
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249907846710'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '543'
+            ETag:
+              schema:
+                type: string
+                example: W/"21f-auRCDJcGyFxNz37RZfNQmaaVQic"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 04:01:41 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  - id: 5
+                    title: task5
+                    description: this is task 1
+                    dueDate: '2024-09-01T04:00:00.000Z'
+                    priority: null
+                    storyPoint: null
+                    status: OPEN
+                    createdById: 1
+                    createdAt: '2024-08-31T10:49:21.701Z'
+                    updatedAt: '2024-08-31T12:30:09.870Z'
+                    deletedAt: null
+                    labels:
+                      - label:
+                          id: 27
+                          name: dev
+                      - label:
+                          id: 35
+                          name: new
+                    assignees:
+                      - user:
+                          id: 1
+                          username: user1
+                      - user:
+                          id: 3
+                          username: user3
+                    createdBy:
+                      id: 1
+                      username: user1
+                pagination:
+                  total: 2
+                  pageCount: 2
+                  page: 1
+                  pageSize: 1
+    post:
+      tags:
+        - v1 > tasks
+      summary: create new task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: task99
+                description: this is task 99
+                dueDate: '2024-09-01 12:00:00.000'
+                createdBy: 1
+                labels:
+                  - dev
+                assignees:
+                  - 4
+      responses:
+        '201':
+          description: Created
+          headers:
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+                example: '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+                example: '99'
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+                example: '17249912362039'
+            Content-Type:
+              schema:
+                type: string
+                example: application/json; charset=utf-8
+            Content-Length:
+              schema:
+                type: integer
+                example: '412'
+            ETag:
+              schema:
+                type: string
+                example: W/"19c-cDK/fPojR3oXMujk+/JmFK/w3fQ"
+            Date:
+              schema:
+                type: string
+                example: Sun, 01 Sep 2024 04:09:12 GMT
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                error: null
+                data:
+                  id: 8
+                  title: task99
+                  description: this is task 99
+                  dueDate: '2024-09-01T04:00:00.000Z'
+                  priority: null
+                  storyPoint: null
+                  status: OPEN
+                  createdById: 1
+                  createdAt: '2024-09-01T04:09:12.616Z'
+                  updatedAt: '2024-09-01T04:09:12.616Z'
+                  deletedAt: null
+                  labels:
+                    - label:
+                        id: 27
+                        name: dev
+                  assignees:
+                    - user:
+                        id: 4
+                        username: user4
+                  createdBy:
+                    id: 1
+                    username: user1

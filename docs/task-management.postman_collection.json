@@ -1,0 +1,1485 @@
+{
+	"info": {
+		"_postman_id": "684659c3-6f82-4042-8a9d-b76a277f23f8",
+		"name": "task-management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2327766"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "comments",
+					"item": [
+						{
+							"name": "get by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/comments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"comments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249868200216"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "308"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"134-XvzpuC659HMcXgn+GOOypR1pFkA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 02:55:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 1,\n        \"taskId\": 5,\n        \"content\": \"this is my comment\",\n        \"createdAt\": \"2024-08-31T12:27:33.742Z\",\n        \"updatedAt\": \"2024-08-31T12:29:19.662Z\",\n        \"deletedAt\": null,\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"user1\",\n            \"createdAt\": \"2024-08-31T08:11:24.301Z\",\n            \"updatedAt\": \"2024-08-31T08:11:24.301Z\",\n            \"deletedAt\": null\n        }\n    }\n}"
+								},
+								{
+									"name": "404 Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249868199938"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "33"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"21-hExXrc+B/JrRtNZvDXrmSmOg6/k\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 03:00:13 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": null,\n    \"error\": \"Not Found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "create a comment",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 1111,\r\n    \"taskId\": 6,\r\n    \"content\": \"this is my comment\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/comments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"comments"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "201 Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": 1,\r\n    \"taskId\": 6,\r\n    \"content\": \"this is my comment\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/comments",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249869445731"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "308"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"134-ol4ztlnhywJKDFB1UOqJMtNn1wk\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 02:57:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 2,\n        \"userId\": 1,\n        \"taskId\": 6,\n        \"content\": \"this is my comment\",\n        \"createdAt\": \"2024-09-01T02:57:40.527Z\",\n        \"updatedAt\": \"2024-09-01T02:57:40.527Z\",\n        \"deletedAt\": null,\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"user1\",\n            \"createdAt\": \"2024-08-31T08:11:24.301Z\",\n            \"updatedAt\": \"2024-08-31T08:11:24.301Z\",\n            \"deletedAt\": null\n        }\n    }\n}"
+								},
+								{
+									"name": "400 Bad Request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": 1111,\r\n    \"taskId\": 6,\r\n    \"content\": \"this is my comment\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/comments",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249869445549"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "38"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"26-Lk0aj2H5f+q8gqkA5E/4mgrpJC0\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 03:00:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": null,\n    \"error\": \"invalid userId\"\n}"
+								}
+							]
+						},
+						{
+							"name": "update a comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 2,\r\n    \"taskId\": 6,\r\n    \"content\": \"Hello World\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/comments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"comments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "11111"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": 2,\r\n    \"taskId\": 6,\r\n    \"content\": \"Hello World\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249870296085"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "301"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"12d-C2lRuw9EM8pwhainOkZgvEumvZQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 02:59:26 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 1,\n        \"userId\": 2,\n        \"taskId\": 6,\n        \"content\": \"Hello World\",\n        \"createdAt\": \"2024-08-31T12:27:33.742Z\",\n        \"updatedAt\": \"2024-09-01T02:59:26.325Z\",\n        \"deletedAt\": null,\n        \"user\": {\n            \"id\": 2,\n            \"username\": \"user2\",\n            \"createdAt\": \"2024-08-31T08:11:24.301Z\",\n            \"updatedAt\": \"2024-08-31T08:11:24.301Z\",\n            \"deletedAt\": null\n        }\n    }\n}"
+								},
+								{
+									"name": "400 Bad Request",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": 2,\r\n    \"taskId\": 999,\r\n    \"content\": \"Hello World\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249870295981"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "38"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"26-zAb7KIIX9xyOeTaPku6Iz/KxjUw\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 03:01:10 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": null,\n    \"error\": \"invalid taskId\"\n}"
+								},
+								{
+									"name": "404 Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": 2,\r\n    \"taskId\": 6,\r\n    \"content\": \"Hello World\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "11111"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249870295962"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "33"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"21-hExXrc+B/JrRtNZvDXrmSmOg6/k\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 03:01:29 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": null,\n    \"error\": \"Not Found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/comments/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"comments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "204 No Content",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/comments/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249870806015"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"e-hDOZGZ11/MTPwZq/A8sGFlQzkPc\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 02:59:56 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						},
+						{
+							"name": "query",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/comments?pagination[page]=1&pagination[pageSize]=1&filters[userId]=1&sort[0]=createdAt:asc",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"comments"
+									],
+									"query": [
+										{
+											"key": "pagination[page]",
+											"value": "1"
+										},
+										{
+											"key": "pagination[pageSize]",
+											"value": "1"
+										},
+										{
+											"key": "filters[userId]",
+											"value": "1"
+										},
+										{
+											"key": "sort[0]",
+											"value": "createdAt:asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/comments?pagination[page]=1&pagination[pageSize]=1&filters[userId]=1&sort[0]=createdAt:asc",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"comments"
+											],
+											"query": [
+												{
+													"key": "pagination[page]",
+													"value": "1"
+												},
+												{
+													"key": "pagination[pageSize]",
+													"value": "1"
+												},
+												{
+													"key": "filters[userId]",
+													"value": "1"
+												},
+												{
+													"key": "sort[0]",
+													"value": "createdAt:asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249868680131"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "371"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"173-VdR5F4moJHGPe45kG2z8SF2AYrA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 02:56:30 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"userId\": 1,\n            \"taskId\": 5,\n            \"content\": \"this is my comment\",\n            \"createdAt\": \"2024-08-31T12:27:33.742Z\",\n            \"updatedAt\": \"2024-08-31T12:29:19.662Z\",\n            \"deletedAt\": null,\n            \"user\": {\n                \"id\": 1,\n                \"username\": \"user1\",\n                \"createdAt\": \"2024-08-31T08:11:24.301Z\",\n                \"updatedAt\": \"2024-08-31T08:11:24.301Z\",\n                \"deletedAt\": null\n            }\n        }\n    ],\n    \"pagination\": {\n        \"total\": 1,\n        \"pageCount\": 1,\n        \"page\": 1,\n        \"pageSize\": 1\n    }\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "tasks",
+					"item": [
+						{
+							"name": "get by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/tasks/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"tasks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/tasks/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"tasks",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249904825473"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "484"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1e4-78qp08FlF54f6bDjylRjHiMjRMY\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 03:56:38 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 6,\n        \"title\": \"task1\",\n        \"description\": \"this is task 1\",\n        \"dueDate\": \"2024-09-01T04:00:00.000Z\",\n        \"priority\": null,\n        \"storyPoint\": null,\n        \"status\": \"OPEN\",\n        \"createdById\": 1,\n        \"createdAt\": \"2024-08-31T10:49:55.728Z\",\n        \"updatedAt\": \"2024-08-31T10:49:55.728Z\",\n        \"deletedAt\": null,\n        \"labels\": [\n            {\n                \"label\": {\n                    \"id\": 27,\n                    \"name\": \"dev\"\n                }\n            },\n            {\n                \"label\": {\n                    \"id\": 28,\n                    \"name\": \"backend\"\n                }\n            }\n        ],\n        \"assignees\": [\n            {\n                \"user\": {\n                    \"id\": 1,\n                    \"username\": \"user1\"\n                }\n            },\n            {\n                \"user\": {\n                    \"id\": 2,\n                    \"username\": \"user2\"\n                }\n            }\n        ],\n        \"createdBy\": {\n            \"id\": 1,\n            \"username\": \"user1\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "query",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/tasks?filters[status]=OPEN&sort[0]=createdAt:asc&pagination[page]=1&pagination[pageSize]=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "filters[title]",
+											"value": "task5",
+											"disabled": true
+										},
+										{
+											"key": "filters[status]",
+											"value": "OPEN"
+										},
+										{
+											"key": "sort[0]",
+											"value": "createdAt:asc"
+										},
+										{
+											"key": "pagination[page]",
+											"value": "1"
+										},
+										{
+											"key": "pagination[pageSize]",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/tasks?filters[status]=OPEN&sort[0]=createdAt:asc&pagination[page]=1&pagination[pageSize]=1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"tasks"
+											],
+											"query": [
+												{
+													"key": "filters[title]",
+													"value": "task5",
+													"disabled": true
+												},
+												{
+													"key": "filters[status]",
+													"value": "OPEN"
+												},
+												{
+													"key": "sort[0]",
+													"value": "createdAt:asc"
+												},
+												{
+													"key": "pagination[page]",
+													"value": "1"
+												},
+												{
+													"key": "pagination[pageSize]",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249907846710"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "543"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"21f-auRCDJcGyFxNz37RZfNQmaaVQic\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 04:01:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": [\n        {\n            \"id\": 5,\n            \"title\": \"task5\",\n            \"description\": \"this is task 1\",\n            \"dueDate\": \"2024-09-01T04:00:00.000Z\",\n            \"priority\": null,\n            \"storyPoint\": null,\n            \"status\": \"OPEN\",\n            \"createdById\": 1,\n            \"createdAt\": \"2024-08-31T10:49:21.701Z\",\n            \"updatedAt\": \"2024-08-31T12:30:09.870Z\",\n            \"deletedAt\": null,\n            \"labels\": [\n                {\n                    \"label\": {\n                        \"id\": 27,\n                        \"name\": \"dev\"\n                    }\n                },\n                {\n                    \"label\": {\n                        \"id\": 35,\n                        \"name\": \"new\"\n                    }\n                }\n            ],\n            \"assignees\": [\n                {\n                    \"user\": {\n                        \"id\": 1,\n                        \"username\": \"user1\"\n                    }\n                },\n                {\n                    \"user\": {\n                        \"id\": 3,\n                        \"username\": \"user3\"\n                    }\n                }\n            ],\n            \"createdBy\": {\n                \"id\": 1,\n                \"username\": \"user1\"\n            }\n        }\n    ],\n    \"pagination\": {\n        \"total\": 2,\n        \"pageCount\": 2,\n        \"page\": 1,\n        \"pageSize\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "create new task",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"task99\",\r\n  \"description\": \"this is task 99\",\r\n  \"dueDate\": \"2024-09-01 12:00:00.000\",\r\n  \"createdBy\": 1,\r\n  \"labels\": [\"dev\"],\r\n  \"assignees\": [4]   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/tasks",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"tasks"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "201 Created",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"title\": \"task99\",\r\n  \"description\": \"this is task 99\",\r\n  \"dueDate\": \"2024-09-01 12:00:00.000\",\r\n  \"createdBy\": 1,\r\n  \"labels\": [\"dev\"],\r\n  \"assignees\": [4]   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/tasks",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"tasks"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249912362039"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "412"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"19c-cDK/fPojR3oXMujk+/JmFK/w3fQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 04:09:12 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 8,\n        \"title\": \"task99\",\n        \"description\": \"this is task 99\",\n        \"dueDate\": \"2024-09-01T04:00:00.000Z\",\n        \"priority\": null,\n        \"storyPoint\": null,\n        \"status\": \"OPEN\",\n        \"createdById\": 1,\n        \"createdAt\": \"2024-09-01T04:09:12.616Z\",\n        \"updatedAt\": \"2024-09-01T04:09:12.616Z\",\n        \"deletedAt\": null,\n        \"labels\": [\n            {\n                \"label\": {\n                    \"id\": 27,\n                    \"name\": \"dev\"\n                }\n            }\n        ],\n        \"assignees\": [\n            {\n                \"user\": {\n                    \"id\": 4,\n                    \"username\": \"user4\"\n                }\n            }\n        ],\n        \"createdBy\": {\n            \"id\": 1,\n            \"username\": \"user1\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "update a task",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"task5\",\r\n  \"description\": \"this is task 1\",\r\n  \"dueDate\": \"2024-09-01 12:00:00.000\",\r\n  \"createdBy\": 1,\r\n  \"labels\": [\"dev\", \"new\"],\r\n  \"assignees\": [1,3]   \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/tasks/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"tasks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200 OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"title\": \"task5\",\r\n  \"description\": \"this is task 1\",\r\n  \"dueDate\": \"2024-09-01 12:00:00.000\",\r\n  \"createdBy\": 1,\r\n  \"labels\": [\"dev\", \"new\"],\r\n  \"assignees\": [1,3]   \r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/v1/tasks/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"tasks",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249912835182"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "480"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1e0-WKSUZ0s33JnkcJiU/0dVbdv96CA\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 04:09:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"error\": null,\n    \"data\": {\n        \"id\": 5,\n        \"title\": \"task5\",\n        \"description\": \"this is task 1\",\n        \"dueDate\": \"2024-09-01T04:00:00.000Z\",\n        \"priority\": null,\n        \"storyPoint\": null,\n        \"status\": \"OPEN\",\n        \"createdById\": 1,\n        \"createdAt\": \"2024-08-31T10:49:21.701Z\",\n        \"updatedAt\": \"2024-09-01T04:09:59.941Z\",\n        \"deletedAt\": null,\n        \"labels\": [\n            {\n                \"label\": {\n                    \"id\": 27,\n                    \"name\": \"dev\"\n                }\n            },\n            {\n                \"label\": {\n                    \"id\": 35,\n                    \"name\": \"new\"\n                }\n            }\n        ],\n        \"assignees\": [\n            {\n                \"user\": {\n                    \"id\": 1,\n                    \"username\": \"user1\"\n                }\n            },\n            {\n                \"user\": {\n                    \"id\": 3,\n                    \"username\": \"user3\"\n                }\n            }\n        ],\n        \"createdBy\": {\n            \"id\": 1,\n            \"username\": \"user1\"\n        }\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "delete a task",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/tasks/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"tasks",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "204 No Content",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:3000/v1/tasks/:id",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"v1",
+												"tasks",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "plain",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "X-RateLimit-Limit",
+											"value": "100"
+										},
+										{
+											"key": "X-RateLimit-Remaining",
+											"value": "99"
+										},
+										{
+											"key": "X-RateLimit-Reset",
+											"value": "17249913028118"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"e-hDOZGZ11/MTPwZq/A8sGFlQzkPc\""
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 01 Sep 2024 04:10:23 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": null
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

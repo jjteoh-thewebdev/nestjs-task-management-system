@@ -8,11 +8,13 @@ import {
   IsOptional,
   IsString,
   Max,
+  MaxLength,
   Min,
 } from 'class-validator'
 
 export class UpdateTaskDto {
   @IsString()
+  @MaxLength(150)
   title: string
 
   @IsString()
@@ -31,6 +33,8 @@ export class UpdateTaskDto {
 
   @IsOptional()
   @IsInt()
+  @Min(1)
+  @Max(99)
   storyPoint?: number
 
   @IsOptional()

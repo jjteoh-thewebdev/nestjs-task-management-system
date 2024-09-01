@@ -30,16 +30,31 @@ describe(TaskService.name, () => {
         where: { id, deletedAt: null },
         include: {
           labels: {
-            include: {
-              label: true,
+            select: {
+              label: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
             },
           },
           assignees: {
-            include: {
-              user: true,
+            select: {
+              user: {
+                select: {
+                  id: true,
+                  username: true,
+                },
+              },
             },
           },
-          comments: true,
+          createdBy: {
+            select: {
+              id: true,
+              username: true,
+            },
+          },
         },
       })
     })

@@ -1,4 +1,4 @@
-import { IsInt, IsString } from 'class-validator'
+import { IsInt, IsString, MaxLength } from 'class-validator'
 
 export class UpdateCommentDto {
   @IsInt()
@@ -8,5 +8,6 @@ export class UpdateCommentDto {
   taskId: number
 
   @IsString()
+  @MaxLength(150)
   content: string
 }

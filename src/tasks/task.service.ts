@@ -18,6 +18,35 @@ export interface ITaskService {
   deleteOne(id: number): Promise<void>
 }
 
+const outputSignature = {
+  labels: {
+    select: {
+      label: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  },
+  assignees: {
+    select: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+        },
+      },
+    },
+  },
+  createdBy: {
+    select: {
+      id: true,
+      username: true,
+    },
+  },
+}
+
 @Injectable()
 export class TaskService implements ITaskService {
   constructor(private readonly _prisma: PrismaService) {}
@@ -25,19 +54,7 @@ export class TaskService implements ITaskService {
   async findOne(id: number): Promise<Task | null> {
     return await this._prisma.task.findUnique({
       where: { id, deletedAt: null },
-      include: {
-        labels: {
-          include: {
-            label: true,
-          },
-        },
-        assignees: {
-          include: {
-            user: true,
-          },
-        },
-        comments: true,
-      },
+      include: outputSignature,
     })
   }
 
@@ -78,6 +95,7 @@ export class TaskService implements ITaskService {
       orderBy,
       skip,
       take,
+      include: outputSignature,
     })
 
     // compute count
@@ -149,15 +167,7 @@ export class TaskService implements ITaskService {
               }
             : undefined,
         },
-        include: {
-          labels: true,
-          assignees: true,
-          createdBy: {
-            select: {
-              username: true,
-            },
-          },
-        },
+        include: outputSignature,
       })
     })
   }
@@ -267,11 +277,7 @@ export class TaskService implements ITaskService {
           createdById: dto.createdBy,
           // TODO: nested write(upsert) not working....
         },
-        include: {
-          labels: true,
-          assignees: true,
-          createdBy: true,
-        },
+        include: outputSignature,
       })
     })
   }
@@ -291,7 +297,7 @@ export class TaskService implements ITaskService {
   }
 
   private async _isValidUsers(ids: number[]): Promise<boolean> {
-    const validUsers = (
+    const validUserIds = (
       await this._prisma.user.findMany({
         where: {
           id: { in: ids },
@@ -302,6 +308,6 @@ export class TaskService implements ITaskService {
       })
     ).map((user) => user.id)
 
-    return !ids.some((id) => validUsers.includes(id))
+    return ids.every((id) => validUserIds.includes(id))
   }
 }
