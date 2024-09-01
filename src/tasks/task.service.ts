@@ -19,31 +19,34 @@ export interface ITaskService {
   deleteOne(id: number): Promise<void>
 }
 
+// for standardize output
 const outputSignature = {
-  labels: {
-    select: {
-      label: {
-        select: {
-          id: true,
-          name: true,
+  include: {
+    labels: {
+      select: {
+        label: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
       },
     },
-  },
-  assignees: {
-    select: {
-      user: {
-        select: {
-          id: true,
-          username: true,
+    assignees: {
+      select: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+          },
         },
       },
     },
-  },
-  createdBy: {
-    select: {
-      id: true,
-      username: true,
+    createdBy: {
+      select: {
+        id: true,
+        username: true,
+      },
     },
   },
 }
@@ -55,7 +58,7 @@ export class TaskService implements ITaskService {
   async findOne(id: number): Promise<Task | null> {
     return await this._prisma.task.findUnique({
       where: { id, deletedAt: null },
-      include: outputSignature,
+      ...outputSignature,
     })
   }
 
@@ -107,14 +110,13 @@ export class TaskService implements ITaskService {
     const skip = page ? (page - 1) * pageSize : 0
     const take = pageSize
 
-    console.log(where)
     // fetch data
     const tasks = await this._prisma.task.findMany({
       where,
       orderBy,
       skip,
       take,
-      include: outputSignature,
+      ...outputSignature,
     })
 
     // compute count
@@ -186,11 +188,12 @@ export class TaskService implements ITaskService {
               }
             : undefined,
         },
-        include: outputSignature,
+        ...outputSignature,
       })
     })
   }
 
+  // TODO: nested write(upsert) not working, fallback to manual transaction at the moment
   async replaceOne(id: number, dto: UpdateTaskDto): Promise<Task> {
     // if not exist, don't proceed
     if (!(await this._prisma.task.count({ where: { id } }))) {
@@ -294,9 +297,8 @@ export class TaskService implements ITaskService {
           storyPoint: dto.storyPoint,
           status: dto.status || TaskStatus.OPEN,
           createdById: dto.createdBy,
-          // TODO: nested write(upsert) not working....
         },
-        include: outputSignature,
+        ...outputSignature,
       })
     })
   }

@@ -19,6 +19,12 @@ export interface ICommentService {
   deleteOne(id: number): Promise<void>
 }
 
+// for standardize output
+const outputSignature = {
+  include: {
+    user: true,
+  },
+}
 @Injectable()
 export class CommentService implements ICommentService {
   constructor(private readonly _prisma: PrismaService) {}
@@ -26,7 +32,7 @@ export class CommentService implements ICommentService {
   async findOne(id: number): Promise<Comment | null> {
     return await this._prisma.comment.findUnique({
       where: { id, deletedAt: null },
-      include: { user: true },
+      ...outputSignature,
     })
   }
 
@@ -65,14 +71,13 @@ export class CommentService implements ICommentService {
     const skip = page ? (page - 1) * pageSize : 0
     const take = pageSize
 
-    console.log(where)
     // fetch data
     const comments = await this._prisma.comment.findMany({
       where,
       orderBy,
       skip,
       take,
-      include: { user: true },
+      ...outputSignature,
     })
 
     // compute count
@@ -114,7 +119,7 @@ export class CommentService implements ICommentService {
           },
         },
       },
-      include: { user: true },
+      ...outputSignature,
     })
   }
 
@@ -152,7 +157,7 @@ export class CommentService implements ICommentService {
           },
         },
       },
-      include: { user: true },
+      ...outputSignature,
     })
   }
 
