@@ -15,7 +15,7 @@ API design over [here](./docs/api-design.md)
 
 Postman collection [here](./docs/task-management.postman_collection.json)
 
-Swagger(a.k.a OpenAPI spec - auto generated) [here](./docs/openapi-spec.yaml)
+Swagger(a.k.a OpenAPI spec - auto generated some fields may be missing, recommend use postman) [here](./docs/openapi-spec.yaml)
 
 ## Installation
 
