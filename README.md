@@ -78,3 +78,18 @@ $ pnpm run test:e2e
 # test coverage
 $ pnpm run test:cov
 ```
+
+## Tools & Deps
+
+| tool/lib              | description                      |
+| --------------------- | -------------------------------- |
+| husky                 | run lint-staged on commit        |
+| lint-staged           | run lint on pre-commit files     |
+| io-redis              | caching                          |
+| cache-manager-ioredis | caching                          |
+| @nestjs/throttler     | rate limit                       |
+| prisma                | database                         |
+| jest                  | run test                         |
+| ts-mockito            | mock object, stub                |
+| jest-mock-extended    | support mocking of prisma client |
+| cz                    | commitizen-ready repo            |
