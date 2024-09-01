@@ -1,13 +1,15 @@
-import { IsInt, IsString, MaxLength } from 'class-validator'
+import { IsInt, IsOptional, IsString, MaxLength } from 'class-validator'
 
 export class UpdateCommentDto {
+  @IsOptional()
   @IsInt()
-  userId: number
+  userId?: number
 
+  @IsOptional()
   @IsInt()
-  taskId: number
+  taskId?: number
 
   @IsString()
   @MaxLength(150)
-  content: string
+  content?: string
 }

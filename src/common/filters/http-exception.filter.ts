@@ -18,8 +18,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const internalMessage = exception.getResponse()[`message`]
     const message = Array.isArray(internalMessage)
-      ? internalMessage[0]
-      : internalMessage || exception.message
+      ? internalMessage.join(` | `)
+      : exception.message
 
     response
       .status(exception.getStatus() ?? HttpStatus.INTERNAL_SERVER_ERROR)

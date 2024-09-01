@@ -8,6 +8,7 @@ import {
   Inject,
   NotFoundException,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -16,10 +17,11 @@ import {
 } from '@nestjs/common'
 import { ITaskService } from './task.service'
 import { CreateTaskDto } from './dto/create-task.dto'
-import { UpdateTaskDto } from './dto/update-task.dto'
+import { ReplaceTaskDto } from './dto/replace-task.dto'
 import { TaskDiKeys } from './constants/di'
 import { QueryTasksDto } from './dto/query-tasks.dto'
 import { CacheInterceptor } from '@nestjs/cache-manager'
+import { UpdateTaskDto } from './dto/update-task.dto'
 
 @Controller({
   path: `tasks`,
@@ -63,8 +65,14 @@ export class TasksController {
 
   // PUT /v1/tasks/:id
   @Put(`:id`)
+  async replaceOne(@Param(`id`) id: number, @Body() dto: ReplaceTaskDto) {
+    return await this._taskService.updateOne(id, dto, true)
+  }
+
+  // PATCH /v1/tasks/:id
+  @Patch(`:id`)
   async updateOne(@Param(`id`) id: number, @Body() dto: UpdateTaskDto) {
-    return await this._taskService.replaceOne(id, dto)
+    return await this._taskService.updateOne(id, dto)
   }
 
   // DELETE /v1/tasks/:id

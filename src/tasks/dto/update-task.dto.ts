@@ -13,44 +13,47 @@ import {
 } from 'class-validator'
 
 export class UpdateTaskDto {
+  @IsOptional()
   @IsString()
   @MaxLength(150)
-  title: string
+  title?: string
 
+  @IsOptional()
   @IsString()
-  description: string
+  description?: string
 
   @IsOptional()
   @IsDate()
   @Type(() => Date)
-  dueDate?: Date
+  dueDate?: Date | null
 
   @IsOptional()
   @IsInt()
   @Min(1) // 1 - low
   @Max(3) // 3 - high
-  priority?: number
+  priority?: number | null
 
   @IsOptional()
   @IsInt()
   @Min(1)
   @Max(99)
-  storyPoint?: number
+  storyPoint?: number | null
 
   @IsOptional()
   @IsEnum(TaskStatus)
-  status?: TaskStatus
+  status?: TaskStatus | null
 
+  @IsOptional()
   @IsInt()
-  createdBy: number
+  createdBy?: number // in real world application, this maybe extracted from auth token or session
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  labels?: string[]
+  labels?: string[] | null
 
   @IsOptional()
   @IsArray()
   @IsInt({ each: true })
-  assignees?: number[]
+  assignees?: number[] | null
 }

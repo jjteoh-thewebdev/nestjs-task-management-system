@@ -8,6 +8,7 @@ import {
   Inject,
   NotFoundException,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -20,6 +21,7 @@ import { CreateCommentDto } from './dto/create-comment.dto'
 import { UpdateCommentDto } from './dto/update-comment.dto'
 import { QueryCommentsDto } from './dto/query-comments.dto'
 import { CacheInterceptor } from '@nestjs/cache-manager'
+import { ReplaceCommentDto } from './dto/replace-comment.dto'
 
 @Controller({
   path: `comments`,
@@ -63,8 +65,15 @@ export class CommentsController {
 
   // PUT /v1/comments/:id
   @Put(`:id`)
-  async updateOne(@Param(`id`) id: number, @Body() dto: UpdateCommentDto) {
-    return await this._commentService.replaceOne(id, dto)
+  async replaceOne(@Param(`id`) id: number, @Body() dto: ReplaceCommentDto) {
+    console.log(`here`)
+    return await this._commentService.updateOne(id, dto)
+  }
+
+  // PATCH /v1/comments/:id
+  @Patch(`:id`)
+  async UpdateOne(@Param(`id`) id: number, @Body() dto: UpdateCommentDto) {
+    return await this._commentService.updateOne(id, dto)
   }
 
   // DELETE /v1/comments/:id

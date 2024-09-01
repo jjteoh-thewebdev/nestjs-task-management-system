@@ -9,8 +9,9 @@ import { CacheModule } from '@nestjs/cache-manager'
 import { QueryTasksDto } from '../dto/query-tasks.dto'
 import { PaginatedResult } from '../../common/models/paginated-result'
 import { CreateTaskDto } from '../dto/create-task.dto'
-import { UpdateTaskDto } from '../dto/update-task.dto'
+import { ReplaceTaskDto } from '../dto/replace-task.dto'
 import { NotFoundException } from '@nestjs/common'
+import { UpdateTaskDto } from '../dto/update-task.dto'
 
 describe(TasksController.name, () => {
   let tasksController: TasksController
@@ -146,15 +147,20 @@ describe(TasksController.name, () => {
     })
   })
 
-  describe(`updateOne`, () => {
+  describe(`replaceOne`, () => {
     it(`should return updated task on success`, async () => {
       // arrange
       const id = 1
-      const dto: UpdateTaskDto = {
+      const dto: ReplaceTaskDto = {
         title: `test`,
         description: `test`,
+        dueDate: null,
+        storyPoint: null,
+        status: null,
         priority: 1,
         createdBy: 1,
+        labels: [],
+        assignees: null,
       }
       const existedTask = tasksFixtures.find((t) => t.id === id)
 
@@ -174,14 +180,58 @@ describe(TasksController.name, () => {
         deletedAt: existedTask.deletedAt,
       }
 
-      when(mockedTaskService.replaceOne(id, dto)).thenResolve(updatedTask)
+      when(mockedTaskService.updateOne(id, dto, true)).thenResolve(updatedTask)
+
+      // act
+      const actual = await tasksController.replaceOne(id, dto)
+
+      // assert
+      expect(actual).toBe(updatedTask)
+      verify(mockedTaskService.updateOne(id, dto, true)).once()
+    })
+  })
+
+  describe(`updateOne`, () => {
+    it(`should return updated task on success`, async () => {
+      // arrange
+      const id = 1
+      const dto: UpdateTaskDto = {
+        title: `test`,
+        description: `test`,
+        dueDate: null,
+        storyPoint: null,
+        status: null,
+        priority: 1,
+        createdBy: 1,
+        labels: [],
+        assignees: null,
+      }
+      const existedTask = tasksFixtures.find((t) => t.id === id)
+
+      if (!existedTask) throw new Error(`existedTask should not be null`)
+
+      const updatedTask: Task = {
+        id: existedTask.id,
+        title: dto.title || existedTask.title,
+        description: dto.description || existedTask.description,
+        dueDate: dto.dueDate || existedTask.dueDate,
+        priority: dto.priority || existedTask.priority,
+        storyPoint: dto.storyPoint || existedTask.storyPoint,
+        status: TaskStatus.OPEN,
+        createdById: 1,
+        createdAt: existedTask.createdAt,
+        updatedAt: new Date(),
+        deletedAt: existedTask.deletedAt,
+      }
+
+      when(mockedTaskService.updateOne(id, dto)).thenResolve(updatedTask)
 
       // act
       const actual = await tasksController.updateOne(id, dto)
 
       // assert
       expect(actual).toBe(updatedTask)
-      verify(mockedTaskService.replaceOne(id, dto)).once()
+      verify(mockedTaskService.updateOne(id, dto)).once()
     })
   })
 

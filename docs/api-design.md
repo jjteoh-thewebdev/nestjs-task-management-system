@@ -106,9 +106,15 @@ Create new task
 
 <hr>
 
+> PATCH /v1/tasks/:id
+
+Update an existing task
+
+<hr>
+
 > PUT /v1/tasks/:id
 
-Update(Replace) an existing task
+Update(Replace) an existing task. The different with PATCH endpoint is that all dto's properties are required.
 
 <hr>
 
@@ -138,9 +144,15 @@ Create new comment
 
 <hr>
 
+> PATCH /v1/comments/:id
+
+Update an existing comment.
+
+<hr>
+
 > PUT /v1/comments/:id
 
-Update(Replace) an existing comment
+Update(Replace) an existing comment. The different with PATCH endpoint is that all dto's properties are required.
 
 <hr>
 

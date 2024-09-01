@@ -10,12 +10,16 @@ import { PrismaService } from '../prisma/prisma.service'
 import { QueryCommentsDto } from './dto/query-comments.dto'
 import { PaginatedResult } from '../common/models/paginated-result'
 import { orderByParser } from '../common/utils/query.util'
+import { ReplaceCommentDto } from './dto/replace-comment.dto'
 
 export interface ICommentService {
   findOne(id: number): Promise<Comment | null>
   findMany(dto: QueryCommentsDto): Promise<PaginatedResult<Comment>>
   create(dto: CreateCommentDto): Promise<Comment>
-  replaceOne(id: number, dto: UpdateCommentDto): Promise<Comment>
+  updateOne(
+    id: number,
+    dto: UpdateCommentDto | ReplaceCommentDto,
+  ): Promise<Comment>
   deleteOne(id: number): Promise<void>
 }
 
@@ -123,19 +127,24 @@ export class CommentService implements ICommentService {
     })
   }
 
-  async replaceOne(id: number, dto: UpdateCommentDto): Promise<Comment> {
+  async updateOne(
+    id: number,
+    dto: UpdateCommentDto | ReplaceCommentDto,
+  ): Promise<Comment> {
     // if not exist, don't proceed
-    if (!(await this._prisma.comment.count({ where: { id } }))) {
+    if (
+      !(await this._prisma.comment.count({ where: { id, deletedAt: null } }))
+    ) {
       throw new NotFoundException()
     }
 
     // validate task exist
-    if (!(await this._isValidTask(dto.taskId))) {
+    if (dto.taskId && !(await this._isValidTask(dto.taskId))) {
       throw new BadRequestException(`invalid taskId`)
     }
 
     // validate user exist
-    if (!(await this._isValidUser(dto.userId))) {
+    if (dto.userId && !(await this._isValidUser(dto.userId))) {
       throw new BadRequestException(`invalid userId`)
     }
 
@@ -146,16 +155,20 @@ export class CommentService implements ICommentService {
       },
       data: {
         content: dto.content,
-        user: {
-          connect: {
-            id: dto.userId,
-          },
-        },
-        task: {
-          connect: {
-            id: dto.taskId,
-          },
-        },
+        user: dto.userId
+          ? {
+              connect: {
+                id: dto.userId,
+              },
+            }
+          : undefined,
+        task: dto.taskId
+          ? {
+              connect: {
+                id: dto.taskId,
+              },
+            }
+          : undefined,
       },
       ...outputSignature,
     })

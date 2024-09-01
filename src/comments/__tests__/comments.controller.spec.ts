@@ -11,6 +11,7 @@ import { Comment } from '@prisma/client'
 import { PaginatedResult } from '../../common/models/paginated-result'
 import { CreateCommentDto } from '../dto/create-comment.dto'
 import { UpdateCommentDto } from '../dto/update-comment.dto'
+import { ReplaceCommentDto } from '../dto/replace-comment.dto'
 
 describe(CommentsController.name, () => {
   let commentsController: CommentsController
@@ -143,6 +144,40 @@ describe(CommentsController.name, () => {
     })
   })
 
+  describe(`replaceOne`, () => {
+    it(`should return updated task on success`, async () => {
+      // arrange
+      const id = 1
+      const dto: ReplaceCommentDto = {
+        userId: 1,
+        taskId: 1,
+        content: `test`,
+      }
+      const existedComment = commentFixtures.find((c) => c.id === id)
+
+      if (!existedComment) throw new Error(`existedTask should not be null`)
+
+      const updatedComment: Comment = {
+        id: existedComment.id,
+        userId: dto.userId || existedComment.userId,
+        taskId: dto.taskId || existedComment.taskId,
+        content: dto.content || existedComment.content,
+        createdAt: existedComment.createdAt,
+        updatedAt: new Date(),
+        deletedAt: existedComment.deletedAt,
+      }
+
+      when(mockedCommentService.updateOne(id, dto)).thenResolve(updatedComment)
+
+      // act
+      const actual = await commentsController.replaceOne(id, dto)
+
+      // assert
+      expect(actual).toBe(updatedComment)
+      verify(mockedCommentService.updateOne(id, dto)).once()
+    })
+  })
+
   describe(`updateOne`, () => {
     it(`should return updated task on success`, async () => {
       // arrange
@@ -158,22 +193,22 @@ describe(CommentsController.name, () => {
 
       const updatedComment: Comment = {
         id: existedComment.id,
-        userId: dto.userId,
-        taskId: dto.taskId,
-        content: dto.content,
+        userId: dto.userId || existedComment.userId,
+        taskId: dto.taskId || existedComment.taskId,
+        content: dto.content || existedComment.content,
         createdAt: existedComment.createdAt,
         updatedAt: new Date(),
         deletedAt: existedComment.deletedAt,
       }
 
-      when(mockedCommentService.replaceOne(id, dto)).thenResolve(updatedComment)
+      when(mockedCommentService.updateOne(id, dto)).thenResolve(updatedComment)
 
       // act
-      const actual = await commentsController.updateOne(id, dto)
+      const actual = await commentsController.UpdateOne(id, dto)
 
       // assert
       expect(actual).toBe(updatedComment)
-      verify(mockedCommentService.replaceOne(id, dto)).once()
+      verify(mockedCommentService.updateOne(id, dto)).once()
     })
   })
 
