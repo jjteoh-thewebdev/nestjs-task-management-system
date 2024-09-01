@@ -13,6 +13,7 @@ WORKDIR /home/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY prisma ./prisma/
 
 RUN pnpm install
 
@@ -25,6 +26,10 @@ WORKDIR /home/app
 
 COPY . .
 COPY --from=development /home/app/node_modules ./node_modules
+# COPY --from=development /home/app/prisma ./prisma
+
+# Generate Prisma Client
+RUN pnpm run prisma:generate
 
 RUN pnpm run build
 
@@ -38,4 +43,4 @@ WORKDIR /home/app
 COPY --from=build /home/app/node_modules ./node_modules
 COPY --from=build /home/app/dist ./dist
 
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/src/main.js"]

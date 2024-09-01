@@ -5,7 +5,7 @@ services:
     image: api-server
     container_name: api-server
     env_file:
-      - ./.env
+      - ./.local-docker.env ## create in your local, may refer sample-local-docker.env
     ports:
       - 3000:3000
     restart: unless-stopped
