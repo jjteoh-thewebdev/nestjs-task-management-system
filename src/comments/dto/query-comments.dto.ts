@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsInt, IsOptional, ValidateNested } from 'class-validator'
+import { IsDate, IsInt, IsOptional, ValidateNested } from 'class-validator'
 import { QueryDto } from '../../common/models/query.dto'
 
 export class QueryCommentsFilter {
@@ -12,6 +12,16 @@ export class QueryCommentsFilter {
   @IsInt()
   @Type(() => Number)
   userId?: number
+
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  createdAtStart?: Date
+
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  createdAtEnd?: Date
 }
 
 export class QueryCommentsDto extends QueryDto<QueryCommentsFilter> {

@@ -3,12 +3,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
-import { Label, Task, TaskStatus } from '@prisma/client'
+import { Label, Prisma, Task, TaskStatus } from '@prisma/client'
 import { PrismaService } from '../prisma/prisma.service'
 import { CreateTaskDto } from './dto/create-task.dto'
 import { UpdateTaskDto } from './dto/update-task.dto'
 import { QueryTasksDto } from './dto/query-tasks.dto'
 import { PaginatedResult } from '../common/models/paginated-result'
+import { orderByParser } from '../common/utils/query.util'
 
 export interface ITaskService {
   findOne(id: number): Promise<Task | null>
@@ -63,32 +64,50 @@ export class TaskService implements ITaskService {
 
     const page = pagination?.page || 1
     const pageSize = pagination?.pageSize || 10
-    let where = {
+    const where: Prisma.TaskWhereInput = {
       deletedAt: null,
+      createdAt: {
+        lte: new Date(),
+      },
     }
 
     if (filters) {
-      where = {
-        ...where,
-        ...filters,
+      for (const [field, value] of Object.entries(filters)) {
+        if (typeof value === 'string' && field !== 'status') {
+          // apply case-insensitive contains operator to all string variables
+          where[field] = {
+            contains: value,
+          }
+        } else {
+          if (field === `createdById`) {
+            where.createdBy = {
+              id: filters.createdById,
+            }
+          } else if (field === `assigneeId`) {
+            where.assignees = {
+              some: { userId: filters.assigneeId },
+            }
+          } else if (field === `labels`) {
+            where.labels = {
+              every: { labelId: { in: filters.labels } },
+            }
+          } else if (field === `createdAtStart` && where.createdAt) {
+            where.createdAt[`gte`] = filters.createdAtStart
+          } else if (field === `createdAtEnd` && where.createdAt) {
+            where.createdAt[`lte`] = filters.createdAtEnd
+          } else {
+            // Apply exact match for non-string fields
+            where[field] = value
+          }
+        }
       }
     }
 
-    const orderBy: { [key: string]: 'asc' | 'desc' }[] =
-      sort?.map((s) => {
-        const str = s.split(`:`)
-        const ordering: 'asc' | 'desc' =
-          str[1] && [`asc`, `desc`].includes(str[1].toLowerCase())
-            ? (str[1] as 'asc' | 'desc')
-            : `asc`
-
-        return {
-          [str[0]]: ordering,
-        }
-      }) || []
+    const orderBy = orderByParser(sort)
     const skip = page ? (page - 1) * pageSize : 0
     const take = pageSize
 
+    console.log(where)
     // fetch data
     const tasks = await this._prisma.task.findMany({
       where,

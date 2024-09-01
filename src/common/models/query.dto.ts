@@ -34,5 +34,5 @@ export class QueryDto<T> {
   @IsString({ each: true })
   sort?: string[] // format key:asc|desc
 
-  filters?: T
+  filters?: T // filters[field]='hello'
 }

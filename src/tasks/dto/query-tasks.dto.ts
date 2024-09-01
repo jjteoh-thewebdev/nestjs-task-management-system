@@ -1,6 +1,8 @@
 import { TaskStatus } from '@prisma/client'
 import { Type } from 'class-transformer'
 import {
+  IsArray,
+  IsDate,
   IsEnum,
   IsInt,
   IsOptional,
@@ -23,24 +25,40 @@ export class QueryTasksFilter {
   status?: TaskStatus
 
   @IsOptional()
-  @IsString()
-  labels?: string
-
-  @IsOptional()
-  @IsString()
-  assignee?: string
-
-  @IsOptional()
-  @IsString()
-  createdBy?: string
+  @IsArray()
+  @IsInt({ each: true })
+  @Type(() => Number)
+  labels?: number[]
 
   @IsOptional()
   @IsInt()
+  @Type(() => Number)
+  assigneeId?: number
+
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
+  createdById?: number
+
+  @IsOptional()
+  @IsInt()
+  @Type(() => Number)
   storyPoint?: number
 
   @IsOptional()
   @IsInt()
+  @Type(() => Number)
   priority?: number
+
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  createdAtStart?: Date
+
+  @IsOptional()
+  @IsDate()
+  @Type(() => Date)
+  createdAtEnd?: Date
 }
 
 export class QueryTasksDto extends QueryDto<QueryTasksFilter> {

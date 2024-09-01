@@ -3,12 +3,13 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
-import { Comment } from '@prisma/client'
+import { Comment, Prisma } from '@prisma/client'
 import { CreateCommentDto } from './dto/create-comment.dto'
 import { UpdateCommentDto } from './dto/update-comment.dto'
 import { PrismaService } from '../prisma/prisma.service'
 import { QueryCommentsDto } from './dto/query-comments.dto'
 import { PaginatedResult } from '../common/models/paginated-result'
+import { orderByParser } from '../common/utils/query.util'
 
 export interface ICommentService {
   findOne(id: number): Promise<Comment | null>
@@ -34,30 +35,37 @@ export class CommentService implements ICommentService {
 
     const page = pagination?.page || 1
     const pageSize = pagination?.pageSize || 10
-    let where = { deletedAt: null }
+    const where: Prisma.CommentWhereInput = {
+      deletedAt: null,
+      createdAt: {
+        lte: new Date(),
+      },
+    }
 
     if (filters) {
-      where = {
-        ...where,
-        ...filters,
+      for (const [field, value] of Object.entries(filters)) {
+        if (typeof value === 'string') {
+          where[field] = {
+            contains: value,
+          }
+        } else {
+          if (field === `createdAtStart` && where.createdAt) {
+            where.createdAt[`gte`] = filters.createdAtStart
+          } else if (field === `createdAtEnd` && where.createdAt) {
+            where.createdAt[`lte`] = filters.createdAtEnd
+          } else {
+            // Apply exact match for non-string fields
+            where[field] = value
+          }
+        }
       }
     }
 
-    const orderBy: { [key: string]: 'asc' | 'desc' }[] =
-      sort?.map((s) => {
-        const str = s.split(`:`)
-        const ordering: 'asc' | 'desc' =
-          str[1] && [`asc`, `desc`].includes(str[1].toLowerCase())
-            ? (str[1] as 'asc' | 'desc')
-            : `asc`
-
-        return {
-          [str[0]]: ordering,
-        }
-      }) || []
+    const orderBy = orderByParser(sort)
     const skip = page ? (page - 1) * pageSize : 0
     const take = pageSize
 
+    console.log(where)
     // fetch data
     const comments = await this._prisma.comment.findMany({
       where,
