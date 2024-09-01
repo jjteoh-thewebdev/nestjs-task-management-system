@@ -25,7 +25,7 @@ describe(TaskService.name, () => {
       const actual = await taskService.findOne(id)
 
       // assert
-      expect(actual).toEqual(expected)
+      expect(actual).toBe(expected)
       expect(mockedPrismaService.task.findUnique).toHaveBeenCalledWith({
         where: { id, deletedAt: null },
         include: {
@@ -45,6 +45,7 @@ describe(TaskService.name, () => {
     })
   })
 
+  // TODO: more test cases to come
   //   describe(`findMany`, () => {
   //     it(`should return query result on success`, async () => {})
   //   })

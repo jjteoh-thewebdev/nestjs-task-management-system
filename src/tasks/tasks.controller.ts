@@ -36,7 +36,6 @@ export class TasksController {
   @Get(`:id`)
   @UseInterceptors(CacheInterceptor)
   async findOne(@Param(`id`) id: number) {
-    console.log(`triggered`)
     if (isNaN(id)) {
       throw new NotFoundException()
     }

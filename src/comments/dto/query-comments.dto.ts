@@ -11,7 +11,7 @@ export class QueryCommentsFilter {
   @IsOptional()
   @IsInt()
   @Type(() => Number)
-  userId: number
+  userId?: number
 }
 
 export class QueryCommentsDto extends QueryDto<QueryCommentsFilter> {

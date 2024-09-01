@@ -14,7 +14,7 @@ export interface ITaskService {
   findOne(id: number): Promise<Task | null>
   findMany(dto: QueryTasksDto): Promise<PaginatedResult<Task>>
   create(dto: CreateTaskDto): Promise<Task>
-  replaceOne(id, dto: UpdateTaskDto): Promise<Task>
+  replaceOne(id: number, dto: UpdateTaskDto): Promise<Task>
   deleteOne(id: number): Promise<void>
 }
 
